@@ -1,11 +1,13 @@
 @import "compass/reset";
 @import "compass/css3";
+@import "icons/*.png";
 
 $bg_color: #fff;
 $text_color: #333;
 
 $f_standard: #333;
 $f_light: #fff;
+$f_dark: #323a45;
 
 $bg_darkest: #000;
 $bg_dark: #323a45;
@@ -114,11 +116,20 @@ body > header {
 	}
 }
 body > footer {
-	overflow: hidden;
+	position: relative;
+	// overflow: hidden;
 	padding: 10px;
 	color: $f_light;
 	background: $bg_dark;
 	text-align: center;
+	&::before {
+		position: absolute; top: -10px; left: 50%; margin-left: -17.5px;
+		content:'';
+		width: 0px; height: 0px;
+		border-style: solid;
+		border-width: 0 17.5px 20px 17.5px;
+		border-color: transparent transparent $bg_dark transparent;
+	}
 	> div {
 		@extend .table;
 		@extend .container;
@@ -159,8 +170,10 @@ body>.visual {
 }
 body>#main {
 	position: relative; top: -70px;
+	overflow: hidden;
 	@extend .container;
 	article {
+		float: left;
 		padding: 10px;
 		width: 60%;
 		background: $bg_lightest;
@@ -177,15 +190,18 @@ body>#main {
 				}
 			}
 			a.fave {
-				position: absolute; top: 50%; right: 10px; margin-top: -25px;
+				position: absolute; top: 50%; right: 10px; margin-top: -30px;
 				overflow: hidden;
-				@include square(50px);
+				@include square(60px);
 				color: $f_light;
-				background: $c_main;
+				background-color: $c_main;
+				@include icons-sprite(like);
 				text-decoration: none; text-indent: -100em;
 				@include transition(background-color 250ms ease-in);
 				&:hover {
-					background: $c_secondary;
+					background-color: $c_secondary;
+				}
+				span {
 				}
 			}
 		}
@@ -210,7 +226,43 @@ body>#main {
 				padding: 10px 15px;
 			}
 		}
+		.summary {
+			float: left;
+			margin-top: 10px; padding-right: 5px;
+			width: 28%;
+			border-right: 2px solid $bg_light;
+			ol {
+				li {
+					margin-bottom: 5px;
+					font-size: 1.4rem;
+					color: $f_dark;
+					a {
+						position: relative;
+						display: block;
+						padding: 10px 5px;
+						color: inherit;
+						background: $bg_light;
+						text-decoration: none;
+						span {
+							position: absolute; top: 5px; right: 5px;
+							padding: 5px;
+							color: $f_light;
+							background: $bg_dark;
+						}
+						&:hover {
+							color: $f_light;
+							background: $c_main;
+						}
+						&.active {
+							color: $f_light;
+							background: $bg_dark;
+						}
+					}
+				}
+			}
+		}
 		.content {
+			margin-left: 30%;
 			padding-top: 10px;
 			figure {
 				text-align: center;
@@ -227,7 +279,7 @@ body>#main {
 			ul {
 				margin: 10px 0;
 				li {
-					display: inline-table;
+					display: inline-table; margin-bottom: 5px;
 					a.btn {
 						display: table-cell;
 						@include square(160px,false);
@@ -239,10 +291,159 @@ body>#main {
 						&:hover {
 							background: $c_main;
 						}
+						span.icon {
+							margin: 0 auto 10px;
+							display: block; width: image-width("icons/shop.png"); height: image-height("icons/shop.png");
+						}
 						&.shop {
 							background: $c_main;
+							span.icon {
+								@include icons-sprite(shop);
+							}
+						}
+						&.balise {
+							span.icon {
+								@include icons-sprite(localisation)
+							}
 						}
 					}
+				}
+			}
+		}
+	}
+	aside {
+		margin-left: 60%;
+		padding-top: 40px; padding-left: 20px;
+		.graphs {
+			margin-bottom: 15px;
+			@extend .table; border-spacing: 10px;
+			.graph {
+				display: table-cell;
+				text-align: center;
+				.circle {
+					margin-bottom: 15px;
+					display: table; border-spacing: 10px;
+					@include square(150px);
+					background: $c_main;
+					@include border-radius(50%);
+					.disc {
+						@include square(130px);
+						display: table-cell;
+						font-size: 1.4rem;
+						color: $bg_light;
+						background: $bg_dark;
+						@include border-radius(50%);
+						span {
+							font-size: 3rem;
+							color: $f_light;
+						}
+					}
+				}
+				.number {
+					font-size: 1.8rem;
+					span {
+						display: block;
+						font-size: 2.8rem;
+						color: $c_main;
+					}
+				}
+			}
+		}
+		.chat {
+			margin-bottom: 25px;
+			h3 {
+				margin-bottom: 10px;
+				font-size: 2.4rem;
+			}
+			ol {
+				li {
+					margin-bottom: 15px;
+					figure {
+						display: table-cell;
+						@include square(60px, false);
+						img {
+							max-width: 100%;
+							border-bottom: 5px solid $bg_dark;
+						}
+						&.online {
+							img {
+								border-color: $c_main;
+							}
+						}
+					}
+					div.comment {
+						display: table-cell;
+						padding: 10px 15px;
+						font-size: 1.4rem;
+						background: $bg_light;
+						vertical-align: top;
+						.user {
+							display: block;
+							font-weight: bold;
+						}
+						.comment {
+							display: block;
+							font-style: italic;
+						}
+					}
+				}
+			}
+			.field {
+				position: relative;
+				input {
+					display: inline-block;
+					width: 100%;
+					height: 60px;
+					padding: 10px 60px 10px 10px;
+					font-size: 2rem;
+					background: $bg_lightest;
+					border: 1px solid $bg_light;
+					vertical-align: middle;
+				}
+				button {
+					position: absolute; top: 0; right: 0;
+					@include square(60px);
+					background-color: $bg_dark;
+					@include icons-sprite(comment);
+					border: none;
+					vertical-align: middle;
+					cursor: pointer;
+					&::before {
+						position: absolute; top: 50%; left: -10px; margin-top: -10px;
+						content: '';
+						width: 0px; height: 0px;
+						border-style: solid;
+						border-width: 10px 10px 10px 0;
+						border-color: transparent $bg_dark transparent transparent;
+					}
+					span {
+						display: none;
+					}
+					&:hover {
+						background-color: $c_main;
+						&::before {
+							border-color: transparent $c_main transparent transparent;
+						}
+					}
+				}
+			}
+		}
+		.quicklaunch {
+			margin-bottom: 15px;
+			h3 {
+				margin-bottom: 10px;
+				font-size: 2.4rem;
+			}
+			a.launch {
+				display: block;
+				padding: 10px;
+				font-size: 2.4rem;
+				color: $f_light;
+				background: $c_main;
+				text-decoration: none; text-align: center; text-transform: uppercase;
+				@include transition(background-color 250ms ease-in);
+				&:hover {
+					background: $bg_dark;
 				}
 			}
 		}
