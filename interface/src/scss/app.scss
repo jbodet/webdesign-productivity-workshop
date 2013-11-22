@@ -1,0 +1,451 @@
+@import "compass/reset";
+@import "compass/css3";
+@import "icons/*.png";
+
+$bg_color: #fff;
+$text_color: #333;
+
+$f_standard: #333;
+$f_light: #fff;
+$f_dark: #323a45;
+
+$bg_darkest: #000;
+$bg_dark: #323a45;
+$bg_lightest: #fff;
+$bg_light: #dadada;
+
+$c_main: #00aeef;
+$c_secondary: #c0ff00;
+
+* {
+	box-sizing: border-box;
+}
+html {
+	font-size: 62.5%;
+}
+body {
+    margin: 0;
+    background-color: $bg_lightest;
+    color: $f_standard;
+    font-size: 1.4rem; line-height: 1.2;
+    font-family: "Helvetica Narrow", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+@mixin square($l,$inline:true){
+	@if $inline == true {
+		@include inline-block();
+	}
+	width: $l; height: $l;
+}
+.container {
+	margin: 0 auto;
+	width: 100%; max-width: 1024px;
+}
+.table {
+	display: table; table-layout: fixed; width: 100%;
+}
+
+body > header {
+	color: $f_light;
+	background: $bg_darkest;
+	text-align: center;
+	> div {
+		text-align: left;
+		@extend .container;
+		@extend .table;
+		> a, span.separator {
+			display: table-cell;
+			vertical-align: middle;
+		}
+		> a {
+			width: 350px;
+			color: inherit;
+			text-decoration: none;
+			@include transition(background-color 250ms ease-in);
+			&:first-child {
+				width: 200px;
+				&:hover {
+					background: $c_main;
+				}
+			}
+		}
+		h1 {
+			margin: 0; padding: 10px;
+			font-size: 1.8rem; font-weight: normal;
+			&::before {
+				@include square(32px);
+				margin-right: 5px;
+				content:'';
+				background: image-url('xbox-logo.png') no-repeat top left;
+				vertical-align: middle;
+			}
+		}
+		.user {
+			@extend .table;
+			.name, figure {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			figure {
+				@include square(64px, false);
+				border-bottom: 5px solid transparent;
+				img {
+					max-width: 100%;
+				}
+				&.online {
+					border-color: $c_main;
+				}
+			}
+			.name {
+				padding: 0 10px;
+				font-size: 1.4rem;
+				text-align: right;
+				span {
+					display: block;
+					margin-bottom: 5px;
+					font-weight: bold;
+					&+span {
+						font-size: 1.2rem; font-weight: normal; font-style: italic;
+						color: $c_secondary;
+						&::before { margin-right: 5px; content: open-quote; }
+						&::after { margin-left: 5px; content: close-quote; }
+					}
+				}
+			}
+		}
+	}
+}
+body > footer {
+	position: relative;
+	// overflow: hidden;
+	padding: 10px;
+	color: $f_light;
+	background: $bg_dark;
+	text-align: center;
+	&::before {
+		position: absolute; top: -10px; left: 50%; margin-left: -17.5px;
+		content:'';
+		width: 0px; height: 0px;
+		border-style: solid;
+		border-width: 0 17.5px 20px 17.5px;
+		border-color: transparent transparent $bg_dark transparent;
+	}
+	> div {
+		@extend .table;
+		@extend .container;
+		font-size: 1.4rem;
+		text-align: left;
+		p {
+			display: table-cell;
+			width: 200px;
+			text-align: left;
+		}
+		ul {
+			display: table-cell;
+			text-align: right;
+			li {
+				@include inline-block();
+				padding: 0px 5px;
+				border-left: 1px solid $c_secondary;
+				&:first-child {
+					border-left: none;
+				}
+				a {
+					padding: 5px;
+					color: inherit;
+					text-decoration: none;
+					@include transition(color 250ms ease-in);
+					&:hover {
+						color: $c_main;
+					}
+				}
+			}
+		}
+	}
+}
+body>.visual {
+	height: 400px;
+	background: image-url('fond.jpg') no-repeat center center;
+	background-size: cover;
+}
+body>#main {
+	position: relative; top: -70px;
+	overflow: hidden;
+	@extend .container;
+	article {
+		float: left;
+		padding: 10px;
+		width: 60%;
+		background: $bg_lightest;
+		header {
+			position: relative; height: 70px;
+			margin: -90px -10px 20px;
+			color: $f_light;
+			background: rgba($bg_darkest,.8);
+			h1 {
+				padding: 5px 10px;
+				font-size: 5rem;
+				span {
+					color: $c_main;
+				}
+			}
+			a.fave {
+				position: absolute; top: 50%; right: 10px; margin-top: -30px;
+				overflow: hidden;
+				@include square(60px);
+				color: $f_light;
+				background-color: $c_main;
+				@include icons-sprite(like);
+				text-decoration: none; text-indent: -100em;
+				@include transition(background-color 250ms ease-in);
+				&:hover {
+					background-color: $c_secondary;
+				}
+				span {
+				}
+			}
+		}
+		.intro {
+			@extend .table;
+			font-size: 1.8rem;
+			color: $f_standard;
+			background: $bg_light;
+			figure, p {
+				display: table-cell;
+				vertical-align: top;
+			}
+			figure {
+				overflow: hidden;
+				width: image-width("visual-1.png");
+				img {
+					height: 100%;
+					width: auto;
+				}
+			}
+			p {
+				padding: 10px 15px;
+			}
+		}
+		.summary {
+			float: left;
+			margin-top: 10px; padding-right: 5px;
+			width: 28%;
+			border-right: 2px solid $bg_light;
+			ol {
+				li {
+					margin-bottom: 5px;
+					font-size: 1.4rem;
+					color: $f_dark;
+					a {
+						position: relative;
+						display: block;
+						padding: 10px 5px;
+						color: inherit;
+						background: $bg_light;
+						text-decoration: none;
+						span {
+							position: absolute; top: 5px; right: 5px;
+							padding: 5px;
+							color: $f_light;
+							background: $bg_dark;
+						}
+						&:hover {
+							color: $f_light;
+							background: $c_main;
+						}
+						&.active {
+							color: $f_light;
+							background: $bg_dark;
+						}
+					}
+				}
+			}
+		}
+		.content {
+			margin-left: 30%;
+			padding-top: 10px;
+			figure {
+				text-align: center;
+			}
+			p {
+				padding: 0 0 10px;
+				font-size: 1.4rem;
+				strong {
+					font-weight: bold;
+				}
+			}
+		}
+		.more {
+			ul {
+				margin: 10px 0;
+				li {
+					display: inline-table; margin-bottom: 5px;
+					a.btn {
+						display: table-cell;
+						@include square(160px,false);
+						font-size: 1.8rem; font-weight: normal;
+						color: $f_light;
+						background: $bg_dark;
+						vertical-align: middle; text-align: center; text-decoration: none;
+						@include transition(background-color 250ms ease-in);
+						&:hover {
+							background: $c_main;
+						}
+						span.icon {
+							margin: 0 auto 10px;
+							display: block; width: image-width("icons/shop.png"); height: image-height("icons/shop.png");
+						}
+						&.shop {
+							background: $c_main;
+							span.icon {
+								@include icons-sprite(shop);
+							}
+						}
+						&.balise {
+							span.icon {
+								@include icons-sprite(localisation)
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	aside {
+		margin-left: 60%;
+		padding-top: 40px; padding-left: 20px;
+		.graphs {
+			margin-bottom: 15px;
+			@extend .table; border-spacing: 10px;
+			.graph {
+				display: table-cell;
+				text-align: center;
+				.circle {
+					margin-bottom: 15px;
+					display: table; border-spacing: 10px;
+					@include square(150px);
+					background: $c_main;
+					@include border-radius(50%);
+					.disc {
+						@include square(130px);
+						display: table-cell;
+						font-size: 1.4rem;
+						color: $bg_light;
+						background: $bg_dark;
+						@include border-radius(50%);
+						span {
+							font-size: 3rem;
+							color: $f_light;
+						}
+					}
+				}
+				.number {
+					font-size: 1.8rem;
+					span {
+						display: block;
+						font-size: 2.8rem;
+						color: $c_main;
+					}
+				}
+			}
+		}
+		.chat {
+			margin-bottom: 25px;
+			h3 {
+				margin-bottom: 10px;
+				font-size: 2.4rem;
+			}
+			ol {
+				li {
+					margin-bottom: 15px;
+					figure {
+						display: table-cell;
+						@include square(60px, false);
+						img {
+							max-width: 100%;
+							border-bottom: 5px solid $bg_dark;
+						}
+						&.online {
+							img {
+								border-color: $c_main;
+							}
+						}
+					}
+					div.comment {
+						display: table-cell;
+						padding: 10px 15px;
+						font-size: 1.4rem;
+						background: $bg_light;
+						vertical-align: top;
+						.user {
+							display: block;
+							font-weight: bold;
+						}
+						.comment {
+							display: block;
+							font-style: italic;
+						}
+					}
+				}
+			}
+			.field {
+				position: relative;
+				input {
+					display: inline-block;
+					width: 100%;
+					height: 60px;
+					padding: 10px 60px 10px 10px;
+					font-size: 2rem;
+					background: $bg_lightest;
+					border: 1px solid $bg_light;
+					vertical-align: middle;
+				}
+				button {
+					position: absolute; top: 0; right: 0;
+					@include square(60px);
+					background-color: $bg_dark;
+					@include icons-sprite(comment);
+					border: none;
+					vertical-align: middle;
+					cursor: pointer;
+					&::before {
+						position: absolute; top: 50%; left: -10px; margin-top: -10px;
+						content: '';
+						width: 0px; height: 0px;
+						border-style: solid;
+						border-width: 10px 10px 10px 0;
+						border-color: transparent $bg_dark transparent transparent;
+					}
+					span {
+						display: none;
+					}
+					&:hover {
+						background-color: $c_main;
+						&::before {
+							border-color: transparent $c_main transparent transparent;
+						}
+					}
+				}
+			}
+		}
+		.quicklaunch {
+			margin-bottom: 15px;
+			h3 {
+				margin-bottom: 10px;
+				font-size: 2.4rem;
+			}
+			a.launch {
+				display: block;
+				padding: 10px;
+				font-size: 2.4rem;
+				color: $f_light;
+				background: $c_main;
+				text-decoration: none; text-align: center; text-transform: uppercase;
+				@include transition(background-color 250ms ease-in);
+				&:hover {
+					background: $bg_dark;
+				}
+			}
+		}
+	}
+}

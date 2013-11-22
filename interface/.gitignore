@@ -1,0 +1,5 @@
+node_modules
+.sass-cache
+dist
+src/css/*.css
+src/images/icons-*.png

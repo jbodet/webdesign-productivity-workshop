@@ -4,9 +4,9 @@
 http_path = "/"
 
 # COMPASS :
-css_dir = "app/css"
-sass_dir = "app/scss"
-images_dir = "app/images"
+css_dir = "src/css"
+sass_dir = "src/scss"
+images_dir = "src/images"
 
 http_generated_images_path = "../images"
 

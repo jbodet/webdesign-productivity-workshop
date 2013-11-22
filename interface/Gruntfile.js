@@ -8,7 +8,7 @@ module.exports = function (grunt) {
         
         watch: {
             compass: {
-                files: ['app/scss/{,*/}*.scss'],
+                files: ['src/scss/{,*/}*.scss'],
                 tasks: ['compass:livereload']
             },
             livereload: {
@@ -16,9 +16,9 @@ module.exports = function (grunt) {
                     livereload: '<%= connect.options.livereload %>'
                 },
                 files: [
-                    'app/*.html',
-                    'app/css/*.css',
-                    'app/images/*.png'
+                    'src/*.html',
+                    'src/css/*.css',
+                    'src/images/*.png'
                 ]
             }
         },
@@ -32,7 +32,7 @@ module.exports = function (grunt) {
             livereload: {
                 options: {
                     open: true,
-                    base: ['app']
+                    base: ['src']
                 }
             }
         },
@@ -42,11 +42,6 @@ module.exports = function (grunt) {
         },
 
         compass: {
-            options: {
-                sassDir: 'app/scss',
-                cssDir: 'app/css',
-                imagesDir: 'app/images'
-            },
             livereload: {
                 options: {
                     debugInfo: true
@@ -64,7 +59,7 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: 'app',
+                    cwd: 'src',
                     dest: 'dist',
                     src: [
                         '*.html',
