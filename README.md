@@ -1,8 +1,13 @@
-webdesign-productivity-workshop
+Webdesign Productivity Workshop
 ===============================
 
-Installation des outils
------------------------
+Slides
+------
+
+Les slides sont disponibles sur [Speacker Deck](https://speakerdeck.com/antoinerichard/creatifs-boostez-votre-productivite).
+
+Outils
+------
 
 ### Sublime Text
 
