@@ -1,8 +1,10 @@
 Webdesign Productivity Workshop
 ===============================
 
-Slides
-------
+Sources du workshop "Booster votre productivité créative" donné au Stéréolux, le 26/11/2013.
+
+Support de présentation
+-----------------------
 
 Les slides sont disponibles sur [Speacker Deck](https://speakerdeck.com/antoinerichard/creatifs-boostez-votre-productivite).
 
